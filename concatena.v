@@ -18,11 +18,18 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module concatena#(parameter cant_bits = 13)(
-						input wire signed [cant_bits-2:0] dato,
-						output reg signed [cant_bits-1:0] out
+module concatena#(parameter cant_bits = 16)(
+						input wire signed [11:0] dato,
+						output wire signed [cant_bits-1:0] out
     );
 
+reg signed [cant_bits-1:0]cable;
+
 always @*
-	out = {6'b0,{dato[11:5],~{dato[4]}}};
+begin
+	cable = $signed({dato[7:0]}); //modificacion por recomendacion
+	//cable = {dato[11:4],4'b0};
+end
+
+assign out = cable - 16'd1;
 endmodule

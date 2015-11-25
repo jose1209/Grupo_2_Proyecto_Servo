@@ -18,7 +18,7 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module IPD#(parameter cant_bits = 13)(
+module IPD#(parameter cant_bits = 16)(
 	input wire signed [cant_bits-1:0] Pot,Ref,
 	input wire Clk_G,Rst_G,Rx_En,
 	output reg signed [2*cant_bits-1:0] Yk
@@ -34,7 +34,7 @@ reg signed[2*cant_bits-1:0] R_Mul_P,R_Mul_D,R_I,R_I_1;
 //Inicializacion
 
 //Modulo P
-assign Mul_P = Pot*13'sb0000000010010;//Kp
+assign Mul_P = Pot*16'sb0000000000010010;//Kp
 
 //Registro P
 
@@ -55,7 +55,7 @@ always@(posedge Clk_G, posedge Rst_G)
 //Modulo D
 
 assign Mul_D = Pot - R_Mul_D_1;
-assign Sum_P = Mul_D*13'sb0000010010110;//Kd
+assign Sum_P = Mul_D*16'sb0000000010010110;//Kd
 
 //Registro Y(k-1)
 
@@ -109,7 +109,7 @@ always@(posedge Clk_G, posedge Rst_G)
 
 //Calculando I
 
-assign Mul_I = R_Ek*13'sb0000000000111;//KI
+assign Mul_I = R_Ek*16'sb0000000000000111;//KI
 assign Sum_I = R_I_1 + Mul_I;
 
 //Registro I y I(k-1)
@@ -187,23 +187,24 @@ always@*
 						Rx_En_Ek = 1;
 						est_sig = 3'b010;
 					end	
-					
+				
 				3'b010:
 					begin
 						Rx_En_Ek = 0;
-						LD_G = 1;
 						est_sig = 3'b011;
 					end
 					
 				3'b011:
 					begin
-						LD_G = 0;
+						Rx_En_Ek = 0;
+						LD_G = 1;
 						est_sig = 3'b100;
 					end
 				
 				3'b100:
 					begin
 						LD_2 = 1;
+						LD_G = 0;
 						Rx_En_Local = 1;
 						est_sig = 3'b000;
 					end

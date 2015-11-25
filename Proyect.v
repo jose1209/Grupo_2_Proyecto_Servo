@@ -18,7 +18,7 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module ControlRef#(parameter cant_bits = 13)(
+module ControlRef#(parameter cant_bits = 16)(
 
 input wire CLK_G,En,
 input wire reset_G,
