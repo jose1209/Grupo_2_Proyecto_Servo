@@ -22,17 +22,17 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
-module Solo_IPD_Trunk#(parameter cant_bits = 16);
+module Solo_IPD_Trunk#(parameter cant_bits = 13);
 
 	// Inputs
-	reg [cant_bits-1:0] Pot;
-	reg [cant_bits-1:0] Ref;
+	reg [12:0] Pot;
+	reg [12:0] Ref;
 	reg clk;
 	reg rst;
 	reg en;
 
 	// Outputs
-	wire [cant_bits-1:0] salida;
+	wire [12:0] salida;
 
 	// Instantiate the Unit Under Test (UUT)
 	Solo_IPD_Truncamiento uut (
@@ -72,7 +72,7 @@ localparam T = 10;
 
 initial 
 	begin
-		Ref = 16'sb0100101100000000;//150
+		Ref = 13'sb0000011000100;
 		$readmemb("estimulac_bin.txt", Array_IN1,0,101);
 		Filtro = $fopen("ResServoTrun.txt","w"); //Crea el archivo de la rampa donde se guarda el resultado
 			for(j=0; j<101; j=j+1) 
