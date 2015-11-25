@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date:    19:49:28 11/06/2015 
+// Create Date:    14:41:46 11/23/2015 
 // Design Name: 
-// Module Name:    regs 
+// Module Name:    Juntos 
 // Project Name: 
 // Target Devices: 
 // Tool versions: 
@@ -18,35 +18,29 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module regs(
-	input wire A,B,C,D,
-	input wire clk,En,rst,
-	output reg W,X,Y,Z
+module Juntos(
+	input Clk,Rst,Data,
+	output cs_1,sclk_1,salida
     );
-	 
-	always @ (posedge clk,posedge rst )
-	begin
-	if(rst)
-		begin
-			W <= 0;
-			X <= 0;
-			Y <= 0;
-			Z <= 0;
-			end
-	
-	else if(En) begin
-			W <= A;
-			X <= B;
-			Y <= C;
-			Z <= D;
-			end
-			
-		else begin
-		   W <= W;
-			X <= X;
-			Y <= Y;
-			Z <= Z;
-			end
-	end
+
+wire [15:0] cable;
+
+ADC instance_Adc (
+    .clk(Clk), 
+    .rst(Rst), 
+    .sdata(Data), 
+    .out(cable), 
+    .cs(cs_1), 
+    .sclk(sclk_1), 
+    .desp_enable_1(desp_enable)
+    );
+
+pwm instance_Pwm (
+    .clk(Clk), 
+    .rst(Rst), 
+    .PMW_in(cable[7:0]), 
+    .PWM_out(salida)
+    );
+
 
 endmodule

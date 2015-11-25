@@ -18,13 +18,13 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module ControlRef#(parameter cant_bits = 13)(
+module ControlRef#(parameter cant_bits = 16)(
 
 input wire CLK_G,En,
 input wire reset_G,
 input wire A,B,C,D,
-output wire signed [cant_bits-1:0] Datos_out,
-output wire [10:0] sssegs
+output wire signed [cant_bits-1:0] Datos_out//,
+//output wire [10:0] sssegs
 
     );
 	 
@@ -44,16 +44,17 @@ regs RegSW (
     .W(W), 
     .X(X), 
     .Y(Y), 
-    .Z(Z)
+    .Z(Z),
+	 .rst(reset_G)
     );
-
+/*
 disp_mux_SS instance_segmentos (
     .clk(CLK_G), 
     .reset(reset_G), 
     .st(state), 
     .an(sssegs[3:0]), 
     .sseg(sssegs[10:4])
-    );
+    );*/
 
 Constantes_Mem instance_Constantes (
     .estados(state), 

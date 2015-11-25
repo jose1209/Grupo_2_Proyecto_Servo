@@ -7,15 +7,15 @@ module adc1(
 	input wire rx_en, // parte del protocolo, se coloca en alto siempre
 	output wire rx_done_tick, //bandera que indica que se tomaron los 12 bits
 	output wire [11:0] dataout, // 12 bits de salida
-	output wire	 cs1, // clock de muestreo 
+	output reg	 cs, // clock de muestreo 
 	output wire desp_enable
     );
 	 	 
-		 reg cs;
+		 /*reg cs;
 		 BUFG BUFG_inst(
 			.O(cs1),
 			.I(cs)
-		 );
+		 );*/
 		 
 //Lógica para obtener los datos del ADC:
 
