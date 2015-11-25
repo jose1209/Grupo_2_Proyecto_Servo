@@ -18,24 +18,19 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module Proyecto_Servo#(parameter cant_bits = 16)(
+module Proyecto_Servo#(parameter cant_bits = 13)(
 	input wire DataIn,
 	input wire Clk_P,Rst_P,a,b,c,d,Enable,
 	output wire Salida_PWM,
 	output wire [6:0] Nadaout,
 	output wire [10:0] seven_segs,
-	output wire cs_1,sclk_1,
-	output wire [7:0] prueba_prueba
+	output wire cs_1,sclk_1
     );
-	 
-
+wire rx;
 wire signed [cant_bits-1:0] Ref_P,Pot_P,YkT;
 wire signed [2*cant_bits-1:0] Cable;
 wire [6:0] Nada;
 wire [7:0] salida;
-wire rx;
-
-assign prueba_prueba = Ref_P[15:8];
 
 ControlRef instance_Load_Reference (
     .CLK_G(Clk_P), 
@@ -70,7 +65,7 @@ ADC_final instance_ADC (
     .sdata(DataIn), 
     .cs(cs_1), 
     .sclk(sclk_1), 
-    .desp_enable_1(rx), 
+    .desp_enable(rx), 
     .dato_final(Pot_P)
     );
 

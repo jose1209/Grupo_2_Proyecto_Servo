@@ -22,7 +22,7 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
-module Servo_Sin_Trunck#(parameter cant_bits = 16);
+module Servo_Sin_Trunck#(parameter cant_bits = 13);
 
 	// Inputs
 	reg signed [cant_bits-1:0] Pot;
@@ -70,7 +70,7 @@ localparam T = 10;
 
 initial 
 	begin
-		Ref = 16'sb0100101100000000;
+		Ref = 13'sb0101000000000;
 		$readmemb("estimulac_bin.txt", Array_IN1,0,101);
 		Filtro = $fopen("ResServo2.txt","w"); //Crea el archivo de la rampa donde se guarda el resultado
 			for(j=0; j<101; j=j+1) 

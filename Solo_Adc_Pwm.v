@@ -18,17 +18,13 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module Solo_Adc_Pwm#(parameter cant_bits = 16)(
+module Solo_Adc_Pwm#(parameter cant_bits = 13)(
 	input wire Clk,entrada,Rst,
 	output wire salida,cs_1,sclk_1
     );
 
 
 wire signed [cant_bits-1:0] Pot_P;
-wire signed [7:0] cable;
-
-
-
 
 ADC_final instance_Adc (
     .clk(Clk), 
@@ -36,18 +32,13 @@ ADC_final instance_Adc (
     .sdata(entrada), 
     .cs(cs_1), 
     .sclk(sclk_1), 
-    .desp_enable_1(desp_enable), 
+    .desp_enable(desp_enable), 
     .dato_final(Pot_P)
     );
-/*
-Truncador_PWM instance_trunk (
-    .dato_infiltro(Pot_P), 
-    .dato_truncout(cable)
-    );*/
 	
 pwm instance_Pwm (
     .clk(Clk), 
-    .PMW_in(Pot_P[7:0]), 
+    .PMW_in(Pot_P), 
     .PWM_out(salida),
 	 .rst(Rst)
     );

@@ -18,7 +18,7 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module Solo_IPD_Truncamiento#(parameter cant_bits = 16)(
+module Solo_IPD_Truncamiento#(parameter cant_bits = 13)(
 	input wire signed [cant_bits-1:0] Pot,Ref,
 	input wire clk,rst,en,
 	output wire signed [cant_bits-1:0] salida

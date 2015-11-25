@@ -47,11 +47,14 @@ always @ *
 endmodule*/
 
 
-module redondeo#(parameter cant_bits = 16, ent = 9, frac = 7)(
+module redondeo#(parameter cant_bits = 13, ent = 6, frac = 7)(
 					input wire signed [2*cant_bits-1:0] in,           /// 26 bits
 					output reg signed [cant_bits-1:0] out ,              /// 3 bits
 					output wire [frac-1:0] nada					/// 12 bits
     );
+
+initial out = 0;
+
 
 localparam [cant_bits-2:0]	ceros = 0,        // 12 bits
 									unos = ~ceros;

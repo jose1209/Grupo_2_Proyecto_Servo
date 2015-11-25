@@ -24,6 +24,6 @@ always@*
 assign pulse_sclk = (contador_sclk == 15'd31250);
 assign sclk = pulse_sclk;
 
-
+ 
 
 endmodule
